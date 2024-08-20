@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+</head>
+
+<body>
+    <div class="signupSection">
+        <div class="info">
+            <h2>Customer Subscription Likelihood</h2>
+            <i class="icon ion-ios-ionic-outline" aria-hidden="true"></i>
+            
+            {% if prediction[0] == 0 %}
+            <h3>According to our analysis, the relevant customer is <span style="color: #c4424f;">Less Likely to Subscribe</span>.</h3>
+            {% else %}
+            <h3>According to our analysis, the relevant customer is <span style="color: #22b486;">More Likely to Subscribe</span>.</h3>
+            {% endif %}
+            <br><br>
+            <p>Our advanced predictive model assesses the likelihood of a customer subscribing to a term deposit based on a comprehensive analysis of various factors gathered through extensive research in the financial field. By examining patterns and trends, the model provides reliable insights into customer behavior. This enables bankers to identify clients who are more or less likely to subscribe, allowing them to allocate resources more efficiently and tailor their approaches based on individual customer profiles.</p>
+
+            <!-- Go Back Button -->
+            <button class="go-back" onclick="history.back()">
+              <a href="{{ url_for('index') }}" style="color: inherit; text-decoration: none;">Go Back</a></button>
+        </div>
+
+        <div class="imageSection">
+        
+            <img src="static/images/client.jpg" alt="Relevant Image">
+        </div>
+    </div>
+</body>
+
+</html>

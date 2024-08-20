@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Result Prediction Form</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styling.css') }}" />
+  <script>
+    function toggleFields() {
+      var checkbox = document.getElementById('prev_contacted');
+      var additionalFields = document.querySelectorAll('.additional');
+
+      if (checkbox.checked) {
+        additionalFields.forEach(function(field) {
+          field.style.display = 'block';
+        });
+      } else {
+        additionalFields.forEach(function(field) {
+          field.style.display = 'none';
+        });
+      }
+    }
+
+    function updateSliderValue(sliderId, valueId) {
+      var slider = document.getElementById(sliderId);
+      var valueSpan = document.getElementById(valueId);
+      valueSpan.textContent = slider.value;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initial call to set visibility based on checkbox status
+      toggleFields();
+    });
+  </script>
+</head>
+<body>
+  <div class="testbox">
+    <form action="/predict" method="POST" target="_blank">
+      <div class="banner">
+        <!-- Optional banner content or image -->
+      </div>
+      <div class="grid-container">
+        <!-- Column 1 -->
+        <div class="grid-item">
+          <div class="item">
+            <div class="tooltip">
+              <label for="prev_contacted">Previously Contacted:</label>
+              <span class="tooltiptext">Tick the box if the person has been contacted in previous marketing campaigns</span>
+            </div>
+            <input type="checkbox" id="prev_contacted" name="prev_contacted" onclick="toggleFields()">
+          </div>
+
+          <div class="item">
+            <div class="tooltip">
+              <label for="age">Age:</label>
+              <span class="tooltiptext">Age of the Customer</span>
+            </div>
+            <input type="number" id="age" name="age" min="0" placeholder="Enter age">
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="job">Job:</label>
+              <span class="tooltiptext">Occupation of the Customer</span>
+            </div>
+            <select id="job" name="job">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="blue-collar">Blue-collar</option>
+              <option value="management">Management</option>
+              <option value="technician">Technician</option>
+              <option value="admin.">Admin</option>
+              <option value="services">Services</option>
+              <option value="retired">Retired</option>
+              <option value="self-employed">Self-employed</option>
+              <option value="entrepreneur">Entrepreneur</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="housemaid">Housemaid</option>
+              <option value="student">Student</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="marital">Marital Status:</label>
+              <span class="tooltiptext">Marital status of the customer</span>
+            </div>
+            <select id="marital" name="marital">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+              <option value="divorced">Divorced</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="education">Education:</label>
+              <span class="tooltiptext">Highest education level of the customer</span>
+            </div>
+            <select id="education" name="education">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+              <option value="tertiary">Tertiary</option>
+              <option value="higher">Higher</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="default">Cerdit Card Default:</label>
+              <span class="tooltiptext">Whether the person has credit in default</span>
+            </div>
+            <select id="default" name="default">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="balance">Bank Balance:</label>
+              <span class="tooltiptext">Account balance of the customer</span>
+            </div>
+            <input type="number" id="balance" name="balance" min="0" placeholder="Enter balance">
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="housing">Housing Loan:</label>
+              <span class="tooltiptext">Whether the customer has a housing loan</span>
+            </div>
+            <select id="housing" name="housing">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="grid-item">
+          <div class="item">
+            <div class="tooltip">
+              <label for="loan">Personal Loan:</label>
+              <span class="tooltiptext">Whether the customer has a personal loan</span>
+            </div>
+            <select id="loan" name="loan">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="contact">Contacted Method:</label>
+              <span class="tooltiptext">Contacted method in this campaign</span>
+            </div>
+            <select  id="contact" name="contact">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="cellular">Cellular</option>
+              <option value="telephone">Telephone</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="month">Contacted Month:</label>
+              <span class="tooltiptext">Month of the last contact</span>
+            </div>
+            <select id="month" name="month">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="jan">January</option>
+              <option value="feb">February</option>
+              <option value="mar">March</option>
+              <option value="apr">April</option>
+              <option value="may">May</option>
+              <option value="jun">June</option>
+              <option value="jul">July</option>
+              <option value="aug">August</option>
+              <option value="sep">September</option>
+              <option value="oct">October</option>
+              <option value="nov">November</option>
+              <option value="dec">December</option>
+            </select>
+          </div>
+          <div class="item">
+            <div class="tooltip">
+              <label for="duration">Duration of Last Call (in seconds):</label>
+              <span class="tooltiptext">Duration of the last call with the customer in this marketing campaign</span>
+            </div>
+            <input type="number" id="duration" name="duration" min="0" placeholder="Enter duration">
+          </div>
+          <div class="item slider-container">
+            <div class="tooltip">
+              <label for="campaign_slider" title="Number of contacts performed during this campaign">Campaign:</label>
+              <span class="tooltiptext">Number of times customer contacted in this marketing campaign</span>
+            </div>
+            <div class="slider-and-value">
+              <input type="range" id="campaign_slider" name="campaign" min="0" max="65" value="0" oninput="updateSliderValue('campaign_slider', 'campaign_value')">
+              <span id="campaign_value">0</span>
+            </div>
+          </div>
+          <div class="item additional">
+            <div class="tooltip">
+              <label for="pdays">Pdays:</label>
+              <span class="tooltiptext">Number of days since the customer was last contacted</span>
+            </div>
+            <input type="number" id="pdays" name="pdays" min="0" placeholder="Enter number of days">
+          </div>
+          <div class="item additional">
+            <div class="item slider-container">
+              <div class="tooltip">
+                <label for="previous_slider" title="Number of contacts performed before this campaign">Previous:</label>
+                <span class="tooltiptext">Number of time customer contacted before this marketign campaign</span>
+              </div>
+              <div class="slider-and-value">
+                <input type="range" id="previous_slider" name="previous" min="0" max="65" value="0" oninput="updateSliderValue('previous_slider', 'previous_value')">
+                <span id="previous_value">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="item additional">
+            <div class="tooltip">
+              <label for="poutcome">Poutcome:</label>
+              <span class="tooltiptext">Outcome of the previous marketing campaign</span>
+            </div>
+            <select id="poutcome" name="poutcome">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="success">Success</option>
+              <option value="failure">Failure</option>
+              <option value="unknown">Unknown</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="btn-block">
+        <button type="submit">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
